@@ -19,6 +19,8 @@ namespace OpenCqrs.Domain
             where TCommand : IDomainCommand
             where TAggregate : IAggregateRoot;
 
+        Task SendAsync<TCommand>(TCommand command) where TCommand : IDomainCommand<IAggregateRoot>;
+
         /// <summary>
         /// Sends the command and the events returned by the handler will be saved to the event store.
         /// The command handler must implement OpenCqrs.Commands.ICommandHandlerWithDomainEvents&lt;TCommand, TAggregate&gt;.

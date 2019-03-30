@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using OpenCqrs.Commands;
@@ -67,6 +68,40 @@ namespace OpenCqrs.Domain
                 if (publishEvents)
                     await _eventPublisher.PublishAsync(concreteEvent);
             }
+        }
+
+        /// <inheritdoc />
+        public Task SendAsync<TCommand>(TCommand command) where TCommand : IDomainCommand<IAggregateRoot>
+        {
+            throw new NotImplementedException();
+
+            //if (command == null)
+            //    throw new ArgumentNullException(nameof(command));
+
+            //var handler = _handlerResolver.ResolveHandler<IDomainCommandHandlerAsync2<TCommand>>();
+
+
+            //var aggregateType = command.GetType().GetInterfaces()[0].GetGenericArguments().FirstOrDefault();
+
+            //var aggregateTask = _aggregateStore.SaveAggregateAsync<TAggregate>(command.AggregateRootId);
+            //var commandTask = _commandStore.SaveCommandAsync<TAggregate>(command);
+            //var eventsTask = handler.HandleAsync(command);
+
+            //await Task.WhenAll(aggregateTask, commandTask, eventsTask);
+
+            //var publishEvents = PublishEvents(command);
+            //var events = await eventsTask;
+
+            //foreach (var @event in events)
+            //{
+            //    @event.Update(command);
+            //    var concreteEvent = _eventFactory.CreateConcreteEvent(@event);
+
+            //    await _eventStore.SaveEventAsync<TAggregate>((IDomainEvent)concreteEvent, command.ExpectedVersion);
+
+            //    if (publishEvents)
+            //        await _eventPublisher.PublishAsync(concreteEvent);
+            //}
         }
 
         /// <inheritdoc />
